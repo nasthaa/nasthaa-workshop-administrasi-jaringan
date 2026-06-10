@@ -9,11 +9,11 @@
 
 <br>
 
-| Disusun Oleh                     |              |
-| -------------------------------- | ------------ |
-| Rizal Maulana Airlangga          | - 3124600033 |
-| Muhammad Fajrul Fatih Abul 'Ilmi | - 3124600040 |
-| Nur Aini Agusthina               | - 3124600050 |
+| Disusun Oleh                     |            |
+| -------------------------------- | ---------- |
+| Rizal Maulana Airlangga          | 3124600033 |
+| Muhammad Fajrul Fatih Abul 'Ilmi | 3124600040 |
+| Nur Aini Agusthina               | 3124600050 |
 
 | Kelas        | 2 S.Tr. Teknik Informatika B  |
 | ------------ | ----------------------------- |
