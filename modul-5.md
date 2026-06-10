@@ -37,6 +37,7 @@
 # Pre-Lab
 1. Mengapa centralized logging penting di lingkungan container?
 > Centralized logging penting karena pada lingkungan container log dihasilkan oleh banyak container yang berjalan secara terpisah dan dapat dibuat atau dihapus secara dinamis (ephemeral). Jika log hanya disimpan di masing-masing container, proses debugging, monitoring, dan audit menjadi sulit dilakukan. Dengan centralized logging, seluruh log dikumpulkan ke satu lokasi sehingga administrator dapat mencari, menganalisis, dan memantau aktivitas sistem dengan lebih mudah. Selain itu, log tidak hilang ketika container dihapus atau dibuat ulang.
+
 2. Apa perbedaan antara Docker logging driver json-file dan fluentd?
 > | Aspek | json-file | fluentd |
 > | --- | --- | --- |
@@ -47,6 +48,7 @@
 > | **Analisis log** | Harus membaca file log | Dapat diteruskan ke database atau sistem monitoring |
 >  
 > Driver *json-file* cocok untuk penggunaan sederhana karena log disimpan dalam file JSON lokal. Sebaliknya, driver *fluentd* digunakan untuk centralized logging karena log langsung dikirim ke Fluent Bit atau Fluentd untuk diproses dan disimpan secara terpusat.
+
 3. Jelaskan keuntungan menyimpan log di database (PostgreSQL) vs file text.
 > - Mudah dicari menggunakan SQL, misalnya mencari log ERROR atau log dalam rentang waktu tertentu.
 > - Mendukung indexing, sehingga pencarian lebih cepat dibanding membaca file satu per satu.
@@ -55,7 +57,8 @@
 > - Lebih mudah diintegrasikan dengan dashboard dan aplikasi monitoring.
 >  
 > Sedangkan file text lebih sederhana tetapi sulit untuk pencarian, agregasi, dan analisis ketika jumlah log sangat besar.
-3. Apa itu structured logging (JSON) dan mengapa lebih baik daripada plain text log?
+
+4. Apa itu structured logging (JSON) dan mengapa lebih baik daripada plain text log?
 > Structured logging adalah metode pencatatan log dalam format terstruktur, biasanya JSON, sehingga setiap informasi disimpan dalam pasangan key-value. Structured logging lebih baik karena:
 > - Mudah diparsing oleh aplikasi dan sistem monitoring.
 > - Setiap field dapat diakses secara langsung.
@@ -64,7 +67,8 @@
 > - Memudahkan analisis otomatis dan visualisasi data.
 >  
 > Plain text lebih mudah dibaca manusia, tetapi lebih sulit diproses secara otomatis.
-4. Mengapa Fluent Bit lebih cocok untuk sidecar/edge collection dibanding Fluentd?
+
+5. Mengapa Fluent Bit lebih cocok untuk sidecar/edge collection dibanding Fluentd?
 > Fluent Bit lebih cocok digunakan sebagai sidecar atau edge collector karena memiliki konsumsi resource yang sangat kecil dibanding Fluentd.
 > Perbandingan:
 > | Aspek | Fluent Bit | Fluentd |
@@ -80,26 +84,37 @@
 # Screenshot Wajib
 ## docker compose ps: 5 Service Running
 ![](assets/modul-5/1.png)
+
 ## docker compose logs fluent-bit: Fluent Bit Menerim Log (JSON lines di stdout)
 ![](assets/modul-5/2.png)
+
 ## SELECT COUNT(*) FROM logs.fluentbit: Jumlah Total log > 0
 ![](assets/modul-5/3.png)
+
 ## SELECT tag, time, data FROM logs.fluentbit LIMIT 3: raw 3 Kolom Data
 ![](assets/modul-5/4.png)
+
 ## SELECT * FROM logs.recent_logs LIMIT 10: Log Terbaru Via View
 ![](assets/modul-5/5.png)
+
 ## SELECT * FROM logs.structured_logs LIMIT 10: Parsed JSON Log
 ![](assets/modul-5/6.png)
+
 ## Query distribusi per tag: Output Tabel
 ![](assets/modul-5/7.png)
+
 ## Query distribusi per level: Output Tabel
 ![](assets/modul-5/8.png)
+
 ## SELECT * FROM logs.error_summary: Summary Error
 ![](assets/modul-5/9.png)
+
 ## Query log rate per menit: Output Tabel
 ![](assets/modul-5/10.png)
+
 ## curl /api/logs/stats: Response JSON
 ![](assets/modul-5/11.png)
+
 ## curl /api/logs/search?q=error: Response JSON
 ![](assets/modul-5/12.png)
 
@@ -109,6 +124,7 @@
 
 1. Berapa total log yang masuk ke PostgreSQL setelah 5 menit? Tunjukkan distribusi per tag dan per level.
 > ![](assets/modul-5/post-1.png)
+
 2. Tulis query SQL yang menampilkan log rate per menit selama 10 menit terakhir. Tunjukkan hasilnya.
 > **Query SQL:**
 > ```sql
@@ -122,6 +138,7 @@
 > ```
 > Output Hasil Query:  
 > ![](assets/modul-5/post-2.png)
+
 3. Apa yang terjadi jika container fluent-bit di-stop? Apakah container lain juga stop? Apakah log yang dihasilkan selama Fluent Bit down hilang?
 > ![](assets/modul-5/post-3.png)
 > Log tetap konstan dan berhenti bertambah pada database selama Fluent Bit dimatikan, sehingga disimpulkan bahwa log tidak masuk selama Fluent Bit mati. Container lainnya tetap berjalan secara independen meskipun penampung log utama berhenti.
