@@ -37,12 +37,16 @@
 # Pre-Lab
 1. Apa perbedaan default bridge dan user-defined bridge network?
 > Default bridge dibuat otomatis oleh Docker tetapi tidak mendukung DNS antar container. User-defined bridge dibuat manual dan mendukung komunikasi antar container menggunakan nama container.
+
 2. Kapan menggunakan Volume vs Bind Mount vs tmpfs?
 > Volume digunakan untuk data persisten production. Bind mount digunakan saat development agar file host langsung sinkron dengan container. tmpfs digunakan untuk data sementara di memory yang tidak perlu disimpan ke disk.
+
 3. Apa yang terjadi pada named volume saat docker compose down? Bagaimana jika pakai flag -v?
 > docker compose down tidak menghapus named volume sehingga data tetap ada. Jika menggunakan flag -v, maka volume ikut dihapus dan data hilang.
+
 4.  Apa fungsi depends_on dan healthcheck di docker-compose.yml?
 > depends_on mengatur urutan startup service. healthcheck digunakan untuk memeriksa apakah service benar-benar siap digunakan.
+
 5. Mengapa user-defined bridge bisa DNS resolve nama container, sedangkan default bridge tidak?
 > Karena user-defined bridge memiliki embedded DNS server Docker sehingga container dapat saling mengenali menggunakan nama container.
 
@@ -51,27 +55,36 @@
 # Screenshot Wajib
 ## docker network ls
 ![](assets/modul-2/1.png)
+
 ## ping antar Container by Nama
 ![](assets/modul-2/2-1.png)  
 Agar berhasil, buat network, lalu jalankan ulang container di network tersebut.
 ![](assets/modul-2/2-2.png)
+
 ## docker volume ls + inspect
 ![](assets/modul-2/3.png)
+
 ## Volume Sharing antar Container
 ![](assets/modul-2/4.png)
+
 ## Bind Mount Live-Reload (Sebelum atau Sesudah Edit)
 - Sebelum edit  
 ![](assets/modul-2/5-1.png)
 - Setelah edit  
 ![](assets/modul-2/5-2.png)
+
 ## tmpfs inspect
 ![](assets/modul-2/6.png)
+
 ## docker compose ps
 ![](assets/modul-2/7.png)
+
 ## Browser Halaman Web
 ![](assets/modul-2/8.png)
+
 ## curl /api/health Response
 ![](assets/modul-2/9.png)
+
 ## docker compose down
 ![](assets/modul-2/10.png)
 
@@ -84,14 +97,17 @@ Agar berhasil, buat network, lalu jalankan ulang container di network tersebut.
 >   - lab-web = IP: 172.18.0.3/16
 >   - lab-app = IP: 172.18.0.2/16
 > - Container lab-db tidak termasuk karena hanya berada pada network compose-app_backend
+
 2. Hapus container lab-app lalu docker compose up -d lagi. Apakah data PostgreSQL masih ada? Mengapa?
 > ![](assets/modul-2/post-2-1.png)
 > ![](assets/modul-2/post-2-2.png)
 > - Data masih ada
-> - Karena data database tidak disimpan di dalam container, melainkan pada Docker Volume (pg-data) yang didefinisikan pada docker-compose.yml. Sehingga data tidak ikut terhapus saat container dihapus dan masih bisa digunakan kembali saat container baru dibuat
+> - Karena data database tidak disimpan di dalam container, melainkan pada Docker Volume (pg-data) yang didefinisikan pada docker-compose.yml. Sehingga data tidak ikut terhapus saat container dihapus dan masih bisa digunakan kembali saat container baru dibuat.
+
 3. Tunjukkan perbedaan output docker inspect untuk mount type volume vs bind.
-> ![](assets/modul-2/post-3-1.png)
+> ![](assets/modul-2/post-3-1.png)  
 > ![](assets/modul-2/post-3-2.png)
+
 4. Jelaskan alur request dari browser → nginx → Flask → PostgreSQL.
 > - Browser → Nginx
 >   - User membuka: http://localhost:8080
@@ -112,6 +128,7 @@ Agar berhasil, buat network, lalu jalankan ulang container di network tersebut.
 >   - Output JSON:  
 > { "status": "ok", "db_status": "connected" }
 > ![](assets/modul-2/post-4.png)
+
 5. Bandingkan ukuran image yang digunakan stack ini. Mana terbesar dan mengapa?
 > ![](assets/modul-2/post-5.png)
 > - Terbesar: postgres:16-alpine (395 MB)
