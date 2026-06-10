@@ -127,38 +127,38 @@
 > Log tetap konstan dan berhenti bertambah pada database selama Fluent Bit dimatikan, sehingga disimpulkan bahwa log tidak masuk selama Fluent Bit mati. Container lainnya tetap berjalan secara independen meskipun penampung log utama berhenti.
 
 4. Jelaskan alur sebuah log entry dari log-generator stdout sampai bisa di-query di PostgreSQL. Sebutkan setiap komponen yang dilalui.
-    ```text
-    log-generator
-    │
-    ▼
-    stdout
-    │
-    ▼
-    Docker Fluentd Logging Driver
-    │
-    ▼
-    Fluent Bit (Forward Input)
-    │
-    ▼
-    Fluent Bit PostgreSQL Output
-    │
-    ▼
-    PostgreSQL (public.fluentbit)
-    │
-    ▼
-    Flask API / Query SQL
-    ```
-    Komponen mendasar yang dilalui:
-    1. Log Generator
-    2. stdout
-    3. Docker Fluentd Driver
-    4. Fluent Bit
-    5. PostgreSQL
-    6. Flask API atau SQL Client
+> ```text
+> log-generator
+> │
+> ▼
+> stdout
+> │
+> ▼
+> Docker Fluentd Logging Driver
+> │
+> ▼
+> Fluent Bit (Forward Input)
+> │
+> ▼
+> Fluent Bit PostgreSQL Output
+> │
+> ▼
+> PostgreSQL (public.fluentbit)
+> │
+> ▼
+> Flask API / Query SQL
+> ```
+> Komponen mendasar yang dilalui:
+> 1. Log Generator
+> 2. stdout
+> 3. Docker Fluentd Driver
+> 4. Fluent Bit
+> 5. PostgreSQL
+> 6. Flask API atau SQL Client
 
-* **Jelaskan perbedaan antara log Nginx (plain text) dan log generator (structured JSON) saat tersimpan di kolom data JSONB. Mengapa view structured_logs hanya menampilkan log JSON?**
-    **Kesimpulan:**
-    ![](assets/modul-5/post-5.png)
-    * **Log Generator:** Menghasilkan data dalam bentuk *structured JSON*, sehingga secara otomatis dapat diekstrak langsung menjadi field terpisah seperti level, message, service, dan hostname.
-    * **Log Nginx:** Hanya menghasilkan output *plain text* mentah sehingga tidak memiliki struktur objek JSON default pada database.
-    * **View structured_logs:** Hanya menampilkan entri berbasis JSON murni karena query internal pada view tersebut melakukan pemrosesan selektif parsing JSON (`data->>'log'`) yang mengharuskan format string valid berupa objek key-value.
+5. Jelaskan perbedaan antara log Nginx (plain text) dan log generator (structured JSON) saat tersimpan di kolom data JSONB. Mengapa view structured_logs hanya menampilkan log JSON?
+> **Kesimpulan:**
+> ![](assets/modul-5/post-5.png)
+> - **Log Generator:** Menghasilkan data dalam bentuk *structured JSON*, sehingga secara otomatis dapat diekstrak langsung menjadi field terpisah seperti level, message, service, dan hostname.
+> - **Log Nginx:** Hanya menghasilkan output *plain text* mentah sehingga tidak memiliki struktur objek JSON default pada database.
+> - **View structured_logs:** Hanya menampilkan entri berbasis JSON murni karena query internal pada view tersebut melakukan pemrosesan selektif parsing JSON (`data->>'log'`) yang mengharuskan format string valid berupa objek key-value.
