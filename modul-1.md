@@ -83,7 +83,7 @@
 > - COPY 20-envsubst-on-templates.sh
 > - COPY 30-tune-worker-processes.sh
 2. Apa yang terjadi pada data di dalam container setelah container dihapus dengan docker rm? Bagaimana solusinya?
-![](assets/modul-1/post-2.png)
+> ![](assets/modul-1/post-2.png)
 > - Seluruh data di dalam container akan hilang permanen.
 > - Solusi yang bisa digunakan
 >   - Data disimpan di Docker, terpisah dari container

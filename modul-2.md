@@ -52,7 +52,7 @@
 ## docker network ls
 ![](assets/modul-2/1.png)
 ## ping antar Container by Nama
-![](assets/modul-2/2-1.png)
+![](assets/modul-2/2-1.png)  
 Agar berhasil, buat network, lalu jalankan ulang container di network tersebut.
 ![](assets/modul-2/2-2.png)
 ## docker volume ls + inspect
