@@ -21,15 +21,7 @@ Repositori ini berisi dokumentasi teknis, konfigurasi, dan hasil praktikum mata 
 
 ---
 
-## 📝 Ringkasan Tugas Akhir / UTS
+## 📝 Ringkasan Tugas Akhir
 Dokumentasi ini juga mencakup penyelesaian proyek UTS mengenai **Implementasi Docker Desktop dan WSL2** untuk manajemen *web service* yang efisien di lingkungan Windows.
 
----
-
-## 📖 Cara Penggunaan
-Setiap folder modul berisi:
-* `Laporan.pdf`: Dokumentasi resmi praktikum.
-* `configs/`: File konfigurasi mentah (misal: Dockerfile, nginx.conf).
-* `scripts/`: Skrip otomatisasi jika ada.
-
-*Terakhir diperbarui: 30 April 2026*
+*Terakhir diperbarui: 11 Juni 2026*
