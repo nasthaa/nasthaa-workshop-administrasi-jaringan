@@ -114,11 +114,11 @@ Data masih ada
 >   - Membuka akses dari luar (browser, jaringan)
 > - EXPOSE tidak cukup untuk membuat port dapat diakses dari host. Harus pakai -p
 > - Percobaan
->   - docker run -d --name web1 nginx
-![](assets/modul-1/post-3-d-1.png)
+>   - docker run -d --name web1 nginx  
+> ![](assets/modul-1/post-3-d-1.png)  
 >   - docker run -d --name web2 -p 8080:80 nginx
-![](assets/modul-1/post-3-d-2.png)
-![](assets/modul-1/post-3-d-3.png)
+> ![](assets/modul-1/post-3-d-2.png)  
+> ![](assets/modul-1/post-3-d-3.png)  
 
 4. Mengapa menggunakan tag spesifik (misal nginx:1.26) lebih baik daripada nginx:latest untuk production?
 > - Reproducible
